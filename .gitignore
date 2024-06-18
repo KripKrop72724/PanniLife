@@ -1,2 +1,6 @@
 /BaseModules/migrations/
 .idea/
+/.husky/
+/commitlint.config.js
+/package.json
+/package-lock.json
