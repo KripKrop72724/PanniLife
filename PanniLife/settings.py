@@ -31,6 +31,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-$jk_2h_$48q&ka7q^x*7276wsp7$2$*u)w4zsmquayx*c*s2dj'
 
+STATIC_URL = 'static/'
+
+# Define the STATIC_ROOT setting
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 DEBUG = env.bool("DEBUG", default=False)
 # SECURITY WARNING: don't run with debug turned on in production!
 CORS_ALLOW_CREDENTIALS = True
