@@ -16,13 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
 
 from BaseModules.views import CookieTokenObtainPairView, CookieTokenRefreshView, LogoutView
+from BaseModules.viewsets import CheckoutLinkView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # Authentication URLs
+    path("api/", include("BaseModules.api_urls", namespace="api")),
     path('api/token/', CookieTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', CookieTokenRefreshView.as_view(), name='token_refresh'),
     path('api/logout/', LogoutView.as_view(), name='logout'),
+    path('get_checkout_link/', CheckoutLinkView.as_view(), name='get-checkout-link'),
 ]
+
