@@ -7,7 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from BaseModules.models import Customer
-from BaseModules.serializer import CustomerSerializer, CheckoutLinkRequestSerializer, CustomerUpdateSerializer
+from BaseModules.serializer import CustomerSerializer, CheckoutLinkRequestSerializer, CustomerUpdateSerializer, \
+    CommentUpdateSerializer, ImageUpdateSerializer, VideoUpdateSerializer
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
@@ -18,6 +19,33 @@ class CustomerViewSet(viewsets.ModelViewSet):
     def update_progress(self, request, pk=None):
         customer = self.get_object()
         serializer = CustomerUpdateSerializer(customer, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['patch'])
+    def update_comment(self, request, pk=None):
+        customer = self.get_object()
+        serializer = CommentUpdateSerializer(customer, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['patch'])
+    def update_images(self, request, pk=None):
+        customer = self.get_object()
+        serializer = ImageUpdateSerializer(customer, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=True, methods=['patch'])
+    def update_videos(self, request, pk=None):
+        customer = self.get_object()
+        serializer = VideoUpdateSerializer(customer, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
