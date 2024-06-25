@@ -11,10 +11,10 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class Customer(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
-    well_1_donor = models.CharField(max_length=255)
     number_of_wells = models.PositiveIntegerField(default=0)
     address = models.TextField()
     phone_number = models.CharField(max_length=15)
+    well_1_donor = models.CharField(max_length=255)
     well_2_donor = models.TextField(null=True, blank=True)
     well_3_donor = models.TextField(null=True, blank=True)
     well_4_donor = models.TextField(null=True, blank=True)
