@@ -6,12 +6,6 @@ from django.conf import settings
 from rest_framework.exceptions import ValidationError
 
 
-class CustomerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Customer
-        fields = '__all__'
-
-
 class CheckoutLinkRequestSerializer(serializers.Serializer):
     customer_id = serializers.IntegerField()
     success_url = serializers.URLField()
@@ -111,3 +105,12 @@ class VideoUpdateSerializer(serializers.ModelSerializer):
                 instance.videos.add(media_instance)
         instance.save()
         return instance
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+    images = MediaSerializer(many=True, read_only=True)
+    videos = MediaSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Customer
+        fields = '__all__'
